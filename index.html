@@ -11,19 +11,23 @@
     <body>
         <div class="container">
             <div class="row">
-                <div class="col mx-auto my-auto text-center">
-                    <h2 id="question"></h2>
-                    <div id="answer">
-                        <button type="button" id="answer1">A</button>
-                        <button type="button" id="answer2">B</button>
-                        <button type="button" id="answer3">C</button>
-                        <button type="button" id="answer4">D</button>
-                    </div>
+                <div class="col mx-auto my-auto text-center" id="startPage">
                     <h1>Javascript Code Quiz</h1>
                     <p>Try to answer the following questions about Javascript as fast as you can! Each incorrect answers takes away from your overall time.
                         Please click below
                     </p>
                     <button type="button" id="startQuiz">Start Quiz</button>
+                </div>
+                <div class="col mx-auto my-auto text-center hide" id="questionPage">    
+                    <h2 id="question"></h2>
+                        <button type="button" id="answerA">A</button>
+                        <button type="button" id="answerB">B</button>
+                        <button type="button" id="answerC">C</button>
+                        <button type="button" id="answerD">D</button>
+                </div>
+                <div class="col mx-auto my-auto text-center hide" id="highScorePage">
+                    <h3>High Scores</h3>
+                </div>
                 </div>
             </div>
         </div>
