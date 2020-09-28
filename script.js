@@ -44,5 +44,28 @@ function startQuiz () {
     //Remove start page and begin questions
     startQuizDisplay.classList.add("hide");
     questionPageDisplay.classList.remove("hide");
+    addQuestion();
+    
+    var timerInterval = setInterval(function() {
+        secondsLeft--;
+        //NEED TO DEFINE timeEL in HTML - display clock
+        timeEl.textContent = secondsLeft + " seconds left.";
+    
+        if(secondsLeft === 0) {
+          clearInterval(timerInterval);
+          //game over function needed
+        }
+    
+      }, 1000);
 
+}
+//Adds questions to display/answers
+var questionIndex = 0;
+function addQuestion() {
+    if (questionsIndex >= questionsArr.length) {
+        //NEEDS HIGH SCORE DISPLAY AND GAME OVER
+    }
+    else {questionEl.innerHTML = questionArr[questionIndex].question;
+        //add check question function
+    }
 }
