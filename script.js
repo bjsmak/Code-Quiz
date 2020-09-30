@@ -4,9 +4,10 @@ var startQuizButton = document.querySelector('#startQuiz');
 var questionPageDisplay = document.querySelector('#questionPage');
 var questionEl = document.querySelector('#question');
 var answerButtonA = document.querySelector('#answerA');
-var answerButtonA = document.querySelector('#answerB');
-var answerButtonA = document.querySelector('#answerC');
-var answerButtonA = document.querySelector('#answerD');
+var answerButtonB = document.querySelector('#answerB');
+var answerButtonC = document.querySelector('#answerC');
+var answerButtonD = document.querySelector('#answerD');
+var timeEl = document.querySelector('#clock');
 
 //Quiz Questions referenced in an objects/keys matrix
 var questionsArr = [{
@@ -14,14 +15,16 @@ var questionsArr = [{
     answerA: "nav",
     answerB: "meta",
     answerC: "script",
-    answerD: "header"
+    answerD: "header",
+    correctAnswer: "C"
     },
     {
     question: "What element allows the user to manipulate what a button does when it is clicked?",
     answerA: ".classList",
     answerB: ".querySelector",
     answerC: ".button",
-    answerD: ".addEventListener"
+    answerD: ".addEventListener",
+    correctAnswer: "D"
     },
     {
     question: "What HTML element references the Javascript files?",
@@ -37,16 +40,26 @@ var questionsArr = [{
     answerC: "script",
     answerD: "header"}];
 
-//Button to start quiz
+//Button to start quiz and answer buttons
 startQuizButton.addEventListener("click", startQuiz);
+/*answerButtonA.addEventListener("click", checkQuestion('A'));
+answerButtonB.addEventListener("click", checkQuestion('B'));
+answerButtonC.addEventListener("click", checkQuestion('C'));
+answerButtonD.addEventListener("click", checkQuestion('D'));*/
+
+//Seconds on timer
+var secondsLeft = 60;
+var score = 0;
+
 
 function startQuiz () {
     //Remove start page and begin questions
     startQuizDisplay.classList.add("hide");
     questionPageDisplay.classList.remove("hide");
     addQuestion();
+
     
-    var timerInterval = setInterval(function() {
+       var timerInterval = setInterval(function() {
         secondsLeft--;
         //NEED TO DEFINE timeEL in HTML - display clock
         timeEl.textContent = secondsLeft + " seconds left.";
@@ -60,12 +73,21 @@ function startQuiz () {
 
 }
 //Adds questions to display/answers
-var questionIndex = 0;
-function addQuestion() {
-    if (questionsIndex >= questionsArr.length) {
-        //NEEDS HIGH SCORE DISPLAY AND GAME OVER
-    }
-    else {questionEl.innerHTML = questionArr[questionIndex].question;
-        //add check question function
-    }
+function addQuestion(questionIndex) {
+    var questionIndex = 0;
+    questionEl.innerText = questionsArr[questionIndex].question;
+    answerA.innerHTML = questionsArr[questionIndex].answerA;
+    answerB.innerHTML = questionsArr[questionIndex].answerB;
+    answerC.innerHTML = questionsArr[questionIndex].answerC;
+    answerD.innerHTML = questionsArr[questionIndex].answerD;
 }
+
+
+/*function checkQuestion(answer) {
+    correctAnswer = questionsArr[questionIndex].correctAnswer
+    if (answer === correctAnswer){
+        score++;
+    }
+    else {secondsLeft = secondsLeft-10;}
+}*/
+
