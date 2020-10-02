@@ -2,6 +2,7 @@
 var startQuizDisplay = document.querySelector('#startPage');
 var startQuizButton = document.querySelector('#startQuiz');
 var questionPageDisplay = document.querySelector('#questionPage');
+var highScorePage = document.querySelector('#highScorePage');
 var questionEl = document.querySelector('#question');
 var answerButtonA = document.querySelector('#answerA');
 var answerButtonB = document.querySelector('#answerB');
@@ -31,32 +32,35 @@ var questionsArr = [{
     answerA: "nav",
     answerB: "meta",
     answerC: "script",
-    answerD: "header"
+    answerD: "header",
+    correctAnswer: "D"
     },
     {
     question: "What HTML element references the Javascript files?",
     answerA: "nav",
     answerB: "meta",
     answerC: "script",
-    answerD: "header"}];
+    answerD: "header",
+    correctAnswer: "D"}];
 
 //Button to start quiz and answer buttons
 startQuizButton.addEventListener("click", startQuiz);
-/*answerButtonA.addEventListener("click", checkQuestion('A'));
+answerButtonA.addEventListener("click", checkQuestion('A'));
 answerButtonB.addEventListener("click", checkQuestion('B'));
 answerButtonC.addEventListener("click", checkQuestion('C'));
-answerButtonD.addEventListener("click", checkQuestion('D'));*/
+answerButtonD.addEventListener("click", checkQuestion('D'));
 
 //Seconds on timer
 var secondsLeft = 60;
 var score = 0;
+var questionIndex;
 
 
 function startQuiz () {
     //Remove start page and begin questions
     startQuizDisplay.classList.add("hide");
     questionPageDisplay.classList.remove("hide");
-    addQuestion();
+    addQuestion(0);
 
     
        var timerInterval = setInterval(function() {
@@ -66,7 +70,7 @@ function startQuiz () {
     
         if(secondsLeft === 0) {
           clearInterval(timerInterval);
-          //game over function needed
+          gameOver();
         }
     
       }, 1000);
@@ -74,7 +78,7 @@ function startQuiz () {
 }
 //Adds questions to display/answers
 function addQuestion(questionIndex) {
-    var questionIndex = 0;
+    console.log(questionIndex);
     questionEl.innerText = questionsArr[questionIndex].question;
     answerA.innerHTML = questionsArr[questionIndex].answerA;
     answerB.innerHTML = questionsArr[questionIndex].answerB;
@@ -83,11 +87,19 @@ function addQuestion(questionIndex) {
 }
 
 
-/*function checkQuestion(answer) {
-    correctAnswer = questionsArr[questionIndex].correctAnswer
+function checkQuestion(answer) {
+    correctAnswer = questionsArr["correctAnswer"];
     if (answer === correctAnswer){
         score++;
+        addQuestion(1);
     }
-    else {secondsLeft = secondsLeft-10;}
-}*/
+    else {secondsLeft = secondsLeft-10;
+        addQuestion(1);}
+}
+
+function gameOver() {
+    questionPageDisplay.classList.add("hide");
+    highScorePage.classList.remove('hide');
+    
+}
 
