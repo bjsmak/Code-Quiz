@@ -10,6 +10,7 @@ var answerButtonC = document.querySelector('#answerC');
 var answerButtonD = document.querySelector('#answerD');
 var timeEl = document.querySelector('#clock');
 var scorePage = document.querySelector('#score');
+var highScoreSubmit = document.querySelector('#highScoreButton');
 
 //Quiz Questions referenced in an objects/keys matrix
 var questionsArr = [{
@@ -37,12 +38,12 @@ var questionsArr = [{
     correctAnswer: "#"
     },
     {
-    question: "What HTML element references the Javascript files?",
-    answerA: "nav",
-    answerB: "meta",
-    answerC: "script",
-    answerD: "header",
-    correctAnswer: "D"}];
+    question: "What does DOM stand for",
+    answerA: "Document Object Model",
+    answerB: "Display Oriented Model",
+    answerC: "Dominated Object Modeling",
+    answerD: "Distant Object Model",
+    correctAnswer: "Document Object Model"}];
 
 //Button to start quiz and answer buttons
 startQuizButton.addEventListener("click", startQuiz);
@@ -78,7 +79,7 @@ function startQuiz () {
 }
 //Adds questions to display/answers
 function addQuestion() {
-    console.log(questionIndex);
+    //console.log(questionIndex);
     questionEl.innerText = questionsArr[questionIndex].question;
     answerA.innerHTML = questionsArr[questionIndex].answerA;
     answerB.innerHTML = questionsArr[questionIndex].answerB;
@@ -91,14 +92,14 @@ function addQuestion() {
 function checkQuestion() {
     correctAnswer = questionsArr[questionIndex].correctAnswer;
     var answer = this.innerText;
-        console.log(this.innerText , correctAnswer);
+        //console.log(this.innerText , correctAnswer);
         questionIndex++
     if (answer === correctAnswer){
-        document.querySelector('.message').innerText = 'correct!'
+        document.querySelector('.message').innerText = 'Correct!'
     }
     else {
         secondsLeft = secondsLeft-10;
-        document.querySelector('.message').innerText = 'incorrect!'
+        document.querySelector('.message').innerText = 'Incorrect!'
     }
 
     clearInterval(timerInterval);
@@ -119,22 +120,29 @@ function gameOver() {
 }
 
 //On enter to submit initials and append name to local storage with high score
-document.querySelector("click", saveHighScore);
+highScoreSubmit.addEventListener("click", saveHighScore);
 
 //Function to save high score after game over
 function saveHighScore() {
     var userName = document.querySelector('#name-text').value;
-    var scoreTotals = localStorage.getItem("highScoreList");
+    var finalScore = scorePage.innerHTML;
+    var scoreTotals = localStorage.getItem("highScoreTotals");
+    console.log(finalScore);
+    console.log(scoreTotals);
+    console.log(userName);
+
+    var scoreArr = { name: userName, score: finalScore};
 
     if (scoreTotals === null) {
-        localStorage.setItem("highScoreName", JSON.stringify(userName));
-        localStorage.setItem("highScore", JSON.stringify(secondsLeft));
+        localStorage.setItem("highScoreTotals", JSON.stringify([scoreArr]));
+        console.log(scoreTotals);
     } else {
-        scoreTotals = JSON.parse(scoreTotals);
-        localStorage.setItem("highScoreName", JSON.stringify(userName));
-        localStorage.setItem("highScoreName", JSON.stringify(secondsLeft));
+        scoreList = JSON.parse(scoreTotals);
+        localStorage.setItem("highScoreTotals", JSON.stringify([scoreArr]));
     }
     document.querySelector('#high-scores').textContent = scoreTotals;
+    //console.log(scoreTotals);
+    //console.log(userName);
     
 }
 

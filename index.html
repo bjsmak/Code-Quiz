@@ -4,28 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--BOOTSTRAP/CSS FILES-->
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <title>Code Quiz</title>
 </head>
     <body>
-        <div class="container">
+        <div class="container no-gutters">
             <div class="row">
                 <div class="col mx-auto my-auto text-center" id="startPage">
                     <h1>Javascript Code Quiz</h1>
                     <p>Try to answer the following questions about Javascript as fast as you can! Each incorrect answers takes away from your overall time.
                         Please click below
                     </p>
-                    <button type="button" id="startQuiz">Start Quiz</button>
+                    <button type="button" class="btn btn-primary" id="startQuiz">Start Quiz</button>
                 </div>
                 <div class="col mx-auto my-auto text-center hide" id="questionPage">    
                     <h2 id="question"><p></p></h2>
                     <div id="clock"></div>
                     <div class="message"></div>
-                        <button type="button" id="answerA">A</button>
-                        <button type="button" id="answerB">B</button>
-                        <button type="button" id="answerC">C</button>
-                        <button type="button" id="answerD">D</button>
+                        <button type="button" class="btn btn-primary" id="answerA">A</button>
+                        <button type="button" class="btn btn-primary" id="answerB">B</button>
+                        <button type="button" class="btn btn-primary" id="answerC">C</button>
+                        <button type="button" class="btn btn-primary" id="answerD">D</button>
                     </div>
                 </div>
                 <div class="col mx-auto my-auto text-center hide" id="highScorePage">
@@ -33,7 +33,7 @@
                     <p>Please input your initials!</p>
                     <input type="text" placeholder="initials" name="name-text" id="name-text" />
                     <p id="score"></p>
-                    <button type="button" id="highScore">Submit</button>
+                    <button type="button" id="highScoreButton">Submit</button>
                     <div id="high-scores"></div>
                 </div>
             </div>
