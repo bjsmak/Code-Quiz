@@ -127,22 +127,23 @@ function saveHighScore() {
     var userName = document.querySelector('#name-text').value;
     var finalScore = scorePage.innerHTML;
     var scoreTotals = localStorage.getItem("highScoreTotals");
-    console.log(finalScore);
-    console.log(scoreTotals);
-    console.log(userName);
+    //console.log(finalScore);
+    //console.log(scoreTotals);
+    //console.log(userName);
 
     var scoreArr = { name: userName, score: finalScore};
 
     if (scoreTotals === null) {
         localStorage.setItem("highScoreTotals", JSON.stringify([scoreArr]));
+        //Console is logging correct totals to local storage
         console.log(scoreTotals);
     } else {
+        //Future high scores to be added and pushed to the score array
         scoreList = JSON.parse(scoreTotals);
+        scoreList.push(scoreArr);
         localStorage.setItem("highScoreTotals", JSON.stringify([scoreArr]));
     }
-    document.querySelector('#high-scores').textContent = scoreTotals;
-    //console.log(scoreTotals);
-    //console.log(userName);
+    document.querySelector('#high-scores').textContent = 'User ' + userName + ' ,' + 'High Score ' + finalScore;
     
 }
 
