@@ -124,26 +124,26 @@ highScoreSubmit.addEventListener("click", saveHighScore);
 
 //Function to save high score after game over
 function saveHighScore() {
-    var userName = document.querySelector('#name-text').value;
+    //value for user initials
+    var userName = document.querySelector('#name-text').value.trim();
     var finalScore = scorePage.innerHTML;
-    var scoreTotals = localStorage.getItem("highScoreTotals");
-    //console.log(finalScore);
-    //console.log(scoreTotals);
-    //console.log(userName);
+    //Get scores or set to new array
+    var scoreTotals = JSON.parse(window.localStorage.getItem("highScoreTotals"));
+    console.log(finalScore);
+    console.log(scoreTotals);
+    console.log(userName);
 
     var scoreArr = { name: userName, score: finalScore};
+   // console.log(scoreTotals);
+    scoreTotals.push(scoreArr);
+    window.localStorage.setItem("highScoreTotals", JSON.stringify([scoreTotals]));
 
-    if (scoreTotals === null) {
-        localStorage.setItem("highScoreTotals", JSON.stringify([scoreArr]));
-        //Console is logging correct totals to local storage
-        console.log(scoreTotals);
-    } else {
-        //Future high scores to be added and pushed to the score array
-        scoreList = JSON.parse(scoreTotals);
-        scoreList.push(scoreArr);
-        localStorage.setItem("highScoreTotals", JSON.stringify([scoreArr]));
-    }
-    document.querySelector('#high-scores').textContent = 'User ' + userName + ' ,' + 'High Score ' + finalScore;
-    
+
+    scoreTotals.forEach(function(){
+    var liTag = document.createElement("li");
+    liTag.textContent = 'User ' + scoreArr.name + ' ,' + 'High Score ' + scoreArr.score;
+    document.querySelector('#high-scores').appendChild(liTag);
+    //document.querySelector('#high-scores').appendChild(liTag) = 'User ' + userName + ' ,' + 'High Score ' + finalScore;
+    });
 }
 
