@@ -66,7 +66,7 @@ function startQuiz () {
 
      timerInterval = setInterval(function() {
         secondsLeft--;
-        //NEED TO DEFINE timeEL in HTML - display clock
+        //DEFINE timeEL in HTML - display clock
         timeEl.textContent = secondsLeft + " seconds left.";
     
         if(secondsLeft === 0) {
@@ -88,7 +88,7 @@ function addQuestion() {
     document.querySelector('.message').innerText = '';
 }
 
-
+//Check question, integrate with timerInterval function
 function checkQuestion() {
     correctAnswer = questionsArr[questionIndex].correctAnswer;
     var answer = this.innerText;
@@ -123,27 +123,39 @@ function gameOver() {
 highScoreSubmit.addEventListener("click", saveHighScore);
 
 //Function to save high score after game over
-function saveHighScore() {
+function saveHighScore(event) {
+    event.preventDefault()
     //value for user initials
     var userName = document.querySelector('#name-text').value.trim();
+    //console.log(userName);
     var finalScore = scorePage.innerHTML;
+    //console.log(finalScore);
     //Get scores or set to new array
-    var scoreTotals = JSON.parse(window.localStorage.getItem("highScoreTotals"));
-    console.log(finalScore);
-    console.log(scoreTotals);
-    console.log(userName);
-
     var scoreArr = { name: userName, score: finalScore};
+    var scoreTotals = localStorage.getItem("highScoreTotals");
+
+
    // console.log(scoreTotals);
-    scoreTotals.push(scoreArr);
-    window.localStorage.setItem("highScoreTotals", JSON.stringify([scoreTotals]));
+
+    if (scoreTotals === null) {localStorage.setItem("highScoreTotals", JSON.stringify([scoreArr]))}
+        else {
+            //Parse data and push the new score into local storage
+            leadBoard=JSON.parse(scoreTotals);
+            leadBoard.push(scoreArr);
+            localStorage.setItem("highScoreTotals", JSON.stringify([leadBoard]));
+           // console.log(localStorage);
+           console.log(leadBoard);
+        }
 
 
-    scoreTotals.forEach(function(){
-    var liTag = document.createElement("li");
-    liTag.textContent = 'User ' + scoreArr.name + ' ,' + 'High Score ' + scoreArr.score;
-    document.querySelector('#high-scores').appendChild(liTag);
-    //document.querySelector('#high-scores').appendChild(liTag) = 'User ' + userName + ' ,' + 'High Score ' + finalScore;
-    });
+        //Top 3 scores display
+    for (var i = 1; i < 3; i++) {
+        console.log(leadBoard);
+        //create new list element for each high score displayed
+        var createLi = document.createElement("li");
+        createLi.textContent = leadBoard[i].name + " " + leadBoard[i].score;
+        document.querySelector('#high-scores').appendChild(createLi);
+
+    }
 }
 
