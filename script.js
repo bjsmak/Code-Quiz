@@ -131,25 +131,26 @@ function saveHighScore(event) {
     var finalScore = scorePage.innerHTML;
     //console.log(finalScore);
     //Get scores or set to new array
-    var scoreArr = { name: userName, score: finalScore};
-    var scoreTotals = localStorage.getItem("highScoreTotals");
+    var scoreArr =   localStorage.getItem("highScoreTotals") ?  JSON.parse( localStorage.getItem("highScoreTotals")) :  []  ;
+
+
+    scoreArr.push({ name: userName, score: finalScore});
+
 
 
    // console.log(scoreTotals);
 
-    if (scoreTotals === null) {localStorage.setItem("highScoreTotals", JSON.stringify([scoreArr]))}
-        else {
-            //Parse data and push the new score into local storage
-            leadBoard=JSON.parse(scoreTotals);
-            leadBoard.push(scoreArr);
-            localStorage.setItem("highScoreTotals", JSON.stringify([leadBoard]));
+  
+   localStorage.setItem("highScoreTotals", JSON.stringify(scoreArr))//Parse data and push the new score into local storage
+        
            // console.log(localStorage);
-           console.log(leadBoard);
-        }
+       //    console.log(leadBoard);
+        
 
+       var leadBoard = scoreArr;
 
         //Top 3 scores display
-    for (var i = 1; i < 3; i++) {
+    for (var i = 0; i < leadBoard.length; i++) {
         console.log(leadBoard);
         //create new list element for each high score displayed
         var createLi = document.createElement("li");
