@@ -138,18 +138,18 @@ function saveHighScore(event) {
 
 
 
-   // console.log(scoreTotals);
+    // console.log(scoreTotals);
 
   
-   localStorage.setItem("highScoreTotals", JSON.stringify(scoreArr))//Parse data and push the new score into local storage
+    localStorage.setItem("highScoreTotals", JSON.stringify(scoreArr))
         
-           // console.log(localStorage);
-       //    console.log(leadBoard);
+    // console.log(localStorage);
+    //    console.log(leadBoard);
         
 
-       var leadBoard = scoreArr;
+    var leadBoard = scoreArr;
 
-        //Top 3 scores display
+    //Top 3 scores display
     for (var i = 0; i < leadBoard.length; i++) {
         console.log(leadBoard);
         //create new list element for each high score displayed
